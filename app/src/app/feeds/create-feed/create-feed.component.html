@@ -1,0 +1,25 @@
+<mat-form-field>
+  <mat-label>Feed name</mat-label>
+  <input matInput />
+</mat-form-field>
+<mat-form-field>
+  <mat-label>Brand</mat-label>
+  <mat-select>
+    @for (brand of $brands(); track brand._id) {
+    <mat-option [value]="(brand._id)">{{ brand.name }}</mat-option>
+    }
+  </mat-select>
+</mat-form-field>
+<mat-form-field>
+  <mat-label>Textarea</mat-label>
+  <textarea matInput></textarea>
+</mat-form-field>
+
+<button
+    mat-raised-button
+    [disabled]="false"
+    disabledInteractive
+    matTooltip="Fill required information"
+  >
+    Save
+  </button>

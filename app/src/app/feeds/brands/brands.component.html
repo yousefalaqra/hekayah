@@ -1,0 +1,15 @@
+
+<button
+mat-raised-button
+(click)="openDialog()"
+>
+Add
+</button>
+
+<mat-list role="list">
+  @for (brand of brands(); track brand._id) {
+  <mat-list-item role="listitem">
+    {{ brand.name }}</mat-list-item
+  >
+  }
+</mat-list>

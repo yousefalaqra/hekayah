@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 @UntilDestroy()
 @Component({
-  selector: 'feeds-root',
+  selector: 'feed-details',
   standalone: true,
   imports: [HttpClientModule],
   providers: [FeedService, FeedStore],

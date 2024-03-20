@@ -7,6 +7,7 @@ export interface Feed {
 }
 
 export interface Brand {
+  _id: string;
   name: string;
 }
 

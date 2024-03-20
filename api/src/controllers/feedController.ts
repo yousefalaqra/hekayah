@@ -1,7 +1,7 @@
 // src/controllers/feedController.ts
 
 import { Request, Response } from "express";
-import { FeedModel } from "../models"; // Automatically looks for index.ts
+import { FeedModel, BrandModel } from "../models"; // Automatically looks for index.ts
 import mongoose from "mongoose";
 
 export const createFeed = async (req: Request, res: Response) => {
@@ -40,6 +40,30 @@ export const getFeedById = async (req: Request, res: Response) => {
     }
 
     res.status(200).json(feed);
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const getFeedsBrands = async (req: Request, res: Response) => {
+  try {
+    const feedsBrands = await BrandModel.find().exec();
+    res.status(200).json(feedsBrands);
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const createFeedsBrand = async (req: Request, res: Response) => {
+  try {
+    const { name } = req.body;
+
+    const brand = new BrandModel({
+      name: name,
+    });
+
+    await brand.save();
+    res.status(201).json(brand);
   } catch (error: any) {
     res.status(500).json({ message: error.message });
   }

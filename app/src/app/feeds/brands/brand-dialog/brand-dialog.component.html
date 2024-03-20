@@ -1,0 +1,19 @@
+<div class="container">
+  <mat-form-field appearance="fill">
+    <mat-label>Enter brand name</mat-label>
+    <input matInput placeholder="Cavalor" [formControl]="brandName" required />
+    @if (brandName.invalid && brandName.touched){
+    <mat-error>You must enter a value</mat-error>
+    }
+  </mat-form-field>
+
+  <button
+    mat-raised-button
+    [disabled]="brandName.invalid"
+    disabledInteractive
+    matTooltip="Fill required information"
+    (click)="onSave()"
+  >
+    Save
+  </button>
+</div>
