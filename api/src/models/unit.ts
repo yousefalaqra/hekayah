@@ -1,10 +1,20 @@
 import mongoose from 'mongoose';
 
+export enum UnitType{
+  weight = 'weight',
+  volume = 'volume'
+}
 
 export interface Unit {
-    en: string;    
+    name: string,
+    abbreviation: string,
+    type:  UnitType
   }
 
   export const UnitSchema = new mongoose.Schema<Unit>({
-    en: { type: String, required: true },    
+    name: { type: String, required: true },    
+    abbreviation: {type: String, required: true}, 
+    type: {type: UnitType, required: true}
   });
+
+  export const UnitModel = mongoose.model<Unit>('Unit', UnitSchema);

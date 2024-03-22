@@ -1,3 +1,5 @@
+import { Unit } from "./unit";
+
 export interface Feed {
     _id: string
   name: string;
@@ -16,13 +18,6 @@ export interface Quantity {
   unit: Unit;
 }
 
-export interface Unit {
-  en: string;
-}
-
-export interface Unit {
-  en: string;
-}
 
 enum Category {
   forages = 'Forages',

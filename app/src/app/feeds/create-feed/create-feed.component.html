@@ -6,7 +6,15 @@
   <mat-label>Brand</mat-label>
   <mat-select>
     @for (brand of $brands(); track brand._id) {
-    <mat-option [value]="(brand._id)">{{ brand.name }}</mat-option>
+    <mat-option [value]="brand._id">{{ brand.name }}</mat-option>
+    }
+  </mat-select>
+</mat-form-field>
+<mat-form-field>
+  <mat-label>Category</mat-label>
+  <mat-select>
+    @for (Category of categories; track Category) {
+    <mat-option [value]="Category">{{ Category }}</mat-option>
     }
   </mat-select>
 </mat-form-field>
@@ -15,11 +23,21 @@
   <textarea matInput></textarea>
 </mat-form-field>
 
+<section>
+  quantity
+  <mat-form-field>
+    <mat-label>Amount</mat-label>
+    <input matInput />
+  </mat-form-field>
+
+</section>
+
+
 <button
-    mat-raised-button
-    [disabled]="false"
-    disabledInteractive
-    matTooltip="Fill required information"
-  >
-    Save
-  </button>
+  mat-raised-button
+  [disabled]="false"
+  disabledInteractive
+  matTooltip="Fill required information"
+>
+  Save
+</button>

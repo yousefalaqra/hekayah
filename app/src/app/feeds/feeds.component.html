@@ -7,10 +7,10 @@
         <div matListItemTitle>Brands</div>
         <div matListItemLine>Modify your horses' feed brands</div>
       </mat-list-item>
-      <mat-list-item>
-        <mat-icon matListItemIcon>category</mat-icon>
-        <div matListItemTitle>Categories</div>
-        <div matListItemLine>Modify your horses' feed categories</div>
+      <mat-list-item (click)="goTo('units')">
+        <mat-icon matListItemIcon>swap_horiz</mat-icon>
+        <div matListItemTitle>Units</div>
+        <div matListItemLine>Modify your horses' feed units</div>
       </mat-list-item>
       <mat-divider></mat-divider>
     </mat-list>

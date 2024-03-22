@@ -1,0 +1,25 @@
+<button mat-raised-button (click)="openDialog()">Add</button>
+
+<h3>Feeds Units</h3>
+
+<mat-list>
+  <mat-list-item>
+    <span matListItemTitle>Weight-based Units</span>
+  </mat-list-item>
+  @for (unit of $weightUnits(); track unit._id) {
+  <mat-list-item role="listitem">
+    {{ unit.name }} ({{ unit.abbreviation }})</mat-list-item
+  >
+  }
+</mat-list>
+<mat-divider></mat-divider>
+<mat-list>
+  <mat-list-item>
+    <span matListItemTitle>Volume-based Units</span>
+  </mat-list-item>
+  @for (unit of $volumeUnits(); track unit._id) {
+  <mat-list-item role="listitem">
+    {{ unit.name }} ({{ unit.abbreviation }})</mat-list-item
+  >
+  }
+</mat-list>

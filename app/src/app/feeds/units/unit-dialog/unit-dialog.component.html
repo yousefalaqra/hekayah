@@ -1,0 +1,41 @@
+<div class="container">
+  <form [formGroup]="unitForm" (ngSubmit)="saveUnit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Enter unit name</mat-label>
+      <input matInput placeholder="Grams" [formControl]="name" required />
+      @if (name.invalid && name.touched){
+      <mat-error>You must enter a value</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Enter unit abbreviation</mat-label>
+      <input matInput placeholder="g" [formControl]="abbreviation" required />
+      @if (abbreviation.invalid && abbreviation.touched){
+      <mat-error>You must enter a value</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Unit type</mat-label>
+      <mat-select [formControl]="type" required>
+        <mat-option>--</mat-option>
+        <mat-option [value]="UnitType.weight">{{ UnitType.weight }}</mat-option>
+        <mat-option [value]="UnitType.volume">{{ UnitType.volume }}</mat-option>
+      </mat-select>
+      @if (type.hasError('required')) {
+      <mat-error>Please choose a unit type</mat-error>
+      }
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      [disabled]="unitForm.invalid"
+      disabledInteractive
+      matTooltip="Fill required information"
+      (click)="saveUnit()"
+    >
+      Save
+    </button>
+  </form>
+</div>
