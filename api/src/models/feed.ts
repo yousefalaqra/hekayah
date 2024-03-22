@@ -16,6 +16,7 @@ export interface Feed extends Document {
   brand: Brand;
   quantity: Quantity
   category: Category
+  note: string
 }
 
 
@@ -24,7 +25,8 @@ const feedSchema: Schema = new Schema({
     name: { type: String, required: true },
     brand: { type: Schema.Types.ObjectId, ref: 'Brand' },
     quantity: { type: QuantitySchema, required: true, ref: 'Quantity' },
-    category: {type: Category, required: true}
+    category: {type: Category, required: true},
+    note: {type: String},
 });
 
 

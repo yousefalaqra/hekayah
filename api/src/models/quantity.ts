@@ -12,3 +12,5 @@ export interface Quantity {
   amount: { type: Number, required: true },
   unit: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Unit' },
 }, {_id: false});
+
+export const QuantityModel = mongoose.model<Quantity>('Quantity', QuantitySchema);

@@ -1,18 +1,19 @@
 // src/controllers/feedController.ts
 
 import { Request, Response } from "express";
-import { FeedModel, BrandModel } from "../models"; // Automatically looks for index.ts
+import { FeedModel, BrandModel, QuantityModel} from "../models"; // Automatically looks for index.ts
 import mongoose from "mongoose";
 
 export const createFeed = async (req: Request, res: Response) => {
   try {
-    const { name, brandId, quantity, category } = req.body;
+    const { name, brand, quantity, category, note } = req.body;
 
     const feed = new FeedModel({
       name: name,
-      brand: new mongoose.Types.ObjectId(brandId),
-      quantity: quantity,
+      brand: new mongoose.Types.ObjectId(brand),
+      quantity: new QuantityModel({amount: quantity.amount, unit: new mongoose.Types.ObjectId(quantity.unit)}),
       category: category,
+      note
     });
 
     await feed.save();

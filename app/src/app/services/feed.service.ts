@@ -1,12 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Brand, Feed } from '../models/feeds';
+import { Brand, Feed, FeedModel } from '../models/feeds';
 
 const BASE_URL = 'http://localhost:3000/feeds'; // Define base URL in a separate config file
 
 @Injectable()
 export class FeedService {
   constructor(private http: HttpClient) {}
+
+  createFeed(model: FeedModel) {
+    return this.http.post<Feed>(`${BASE_URL}`, model);
+  }
 
   getAllFeeds() {
     return this.http.get<Array<Feed>>(`${BASE_URL}`);

@@ -1,11 +1,13 @@
-import { Injectable, Signal, WritableSignal, signal } from '@angular/core';
+import { Injectable, Signal, WritableSignal, computed, signal } from '@angular/core';
 
-import { v4 as uuidv4 } from 'uuid';import { Unit, UnitModel } from '../models/unit';
+import { v4 as uuidv4 } from 'uuid';import { Unit, UnitModel, UnitType } from '../models/unit';
 ;
 
 @Injectable()
 export class UnitStore {
   private $units: WritableSignal<Array<Unit>> = signal([]);
+  $volumeUnits: Signal<Array<Unit>> = computed(()=> this.$units().filter(x => x.type === UnitType.volume));
+  $weightUnits: Signal<Array<Unit>> = computed(() => this.$units().filter(X => X.type === UnitType.weight));
 
   get units(): Signal<Array<Unit>> {
     return this.$units.asReadonly();

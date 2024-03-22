@@ -1,13 +1,20 @@
 import { Injectable, Signal, WritableSignal, signal } from '@angular/core';
-import { Brand, Feed } from '../models/feeds';
+import { Brand, Category, Feed, FeedModel } from '../models/feeds';
 
-import { v4 as uuidv4 } from 'uuid';;
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class FeedStore {
   private $feeds: WritableSignal<Array<Feed>> = signal([]);
   private $activeFeed: WritableSignal<Feed | undefined> = signal(undefined);
   private $brands: WritableSignal<Array<Brand>> = signal([]);
+
+  feedCatgories = [
+    'Forages',
+    'Grains',
+    'Balancers & Supplements',
+    'Complete Feeds',
+  ];
 
   get feeds(): Signal<Array<Feed>> {
     return this.$feeds.asReadonly();
@@ -33,6 +40,31 @@ export class FeedStore {
     this.$brands.set(brands);
   }
 
+  addFeed(feedModel: FeedModel) {
+    const id = uuidv4();
+
+    const unit = {}
+    this.$feeds.update((state) => {
+      return [
+        ...state,
+        {_id: id,  name: feedModel.name}
+        
+      ];
+    });
+
+    return id;
+  }
+
+  onAddFeedSuccess(currentId: string, feed: Feed) {
+    this.$feeds.update((state) =>
+      state.map((x) => (x._id === currentId ? feed : x))
+    );
+  }
+
+  onAddFeedFailure(currentId: string) {
+    this.$feeds.update((state) => state.filter((x) => x._id !== currentId));
+  }
+
   addFeedbrand(brandName: string): string {
     const tempId = uuidv4();
     this.$brands.update((state) => {
@@ -49,7 +81,7 @@ export class FeedStore {
 
   cancleCreateBrand(currentId: string): void {
     this.$brands.update((state) => {
-      return state.filter((x) => (x._id !== currentId));
+      return state.filter((x) => x._id !== currentId);
     });
   }
 }

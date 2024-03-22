@@ -3,7 +3,6 @@ import { MatListModule } from '@angular/material/list';
 
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { HttpClientModule } from '@angular/common/http';
-import { Router } from '@angular/router';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -13,6 +12,16 @@ import { FeedStore } from '../../store/feed.store';
 import { MatButtonModule } from '@angular/material/button';
 import { UnitService } from '../../services/unit.service';
 import { UnitStore } from '../../store/unit.store';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { RequiredErrorStateMatcher } from '../../utils/form.utils';
+import { Category, FeedModel } from '../../models/feeds';
+import { Router } from '@angular/router';
 
 @UntilDestroy()
 @Component({
@@ -21,31 +30,48 @@ import { UnitStore } from '../../store/unit.store';
   imports: [
     MatListModule,
     HttpClientModule,
-    MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
     MatButtonModule,
   ],
-  providers: [FeedService, UnitService, FeedStore, UnitStore],
+  providers: [
+    FeedService,
+    UnitService,
+    FeedStore,
+    UnitStore,
+    ReactiveFormsModule,
+    FormsModule,
+  ],
   templateUrl: './create-feed.component.html',
   styleUrl: './create-feed.component.scss',
 })
 export class CreateFeedComponent implements OnInit {
   $brands = this.feedStore.brands;
-  categories = [
-    'Forages',
-    'Grains',
-    'Balancers & Supplements',
-    'Complete Feeds',
-  ];
-  
-  units = ['Grams (g)', 'Kilograms (kg)', 'Pounds (lb)', 'Liters (L)', 'bag'];
+  categories = this.feedStore.feedCatgories;
+  $volumeUnits = this.unitStore.$volumeUnits;
+  $weightUnits = this.unitStore.$weightUnits;
+
+  feedForm = new FormGroup({
+    name: new FormControl('', Validators.required),
+    category: new FormControl(Category, Validators.required),
+    brand: new FormControl('', Validators.required),
+    quantity: new FormGroup({
+      amount: new FormControl(0, Validators.required),
+      unit: new FormControl('', Validators.required),
+    }),
+    note: new FormControl(''),
+  });
+
+  matcher = new RequiredErrorStateMatcher();
 
   constructor(
     private feedService: FeedService,
     private unitService: UnitService,
     private feedStore: FeedStore,
-    private unitStore: UnitStore
+    private unitStore: UnitStore,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -53,5 +79,55 @@ export class CreateFeedComponent implements OnInit {
       .getFeedsBrands()
       .pipe(untilDestroyed(this))
       .subscribe((brands) => this.feedStore.setBrands(brands));
+
+    this.unitService
+      .getUnits()
+      .pipe(untilDestroyed(this))
+      .subscribe((units) => this.unitStore.setUnits(units));
+  }
+
+  get name() {
+    return this.feedForm.controls['name'];
+  }
+
+  get category() {
+    return this.feedForm.controls['category'];
+  }
+
+  get quantity() {
+    return this.feedForm.controls['quantity'];
+  }
+
+  get brand() {
+    return this.feedForm.controls['brand'];
+  }
+
+  get note() {
+    return this.feedForm.controls['note'];
+  }
+
+  saveFeed(): void {
+    const feedModel: FeedModel = {
+      name: this.name.value!,
+      brand: this.brand.value!,
+      category: this.category.value! as unknown as Category,
+      note: this.note.value!,
+      quantity: {
+        amount: this.quantity.value.amount!,
+        unit: this.quantity.value.unit!,
+      },
+    };
+
+    this.feedService
+      .createFeed(feedModel)
+      .pipe(untilDestroyed(this))
+      .subscribe({
+        next: (feed) => {
+          this.router.navigate(['/feeds'])          
+        },
+        error: (err) => {
+         
+        },
+      });
   }
 }

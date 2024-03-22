@@ -41,8 +41,8 @@ import { MatDividerModule } from '@angular/material/divider';
 })
 export class UnitsComponent implements OnInit {
   $units: Signal<Array<Unit>> = this.unitStore.units;
-  $volumeUnits: Signal<Array<Unit>> = computed(()=> this.$units().filter(x => x.type === UnitType.volume));
-  $weightUnits: Signal<Array<Unit>> = computed(() => this.$units().filter(X => X.type === UnitType.weight));
+  $volumeUnits = this.unitStore.$volumeUnits
+  $weightUnits = this.unitStore.$weightUnits
 
   private recentCreatedUnitId = '';
 
