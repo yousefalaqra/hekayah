@@ -4,6 +4,7 @@ import mongoose, { Document, Schema } from 'mongoose';
 import { Brand } from './brand';
 import { Quantity, QuantitySchema } from './quantity';
 
+
 enum Category{
   forages = "Forages", 
   grains  ="Grains", 

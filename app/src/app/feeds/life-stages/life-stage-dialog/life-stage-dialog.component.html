@@ -1,0 +1,61 @@
+<div class="container">
+  <form [formGroup]="lifeStageForm" (ngSubmit)="saveLifeStage()">
+    <mat-form-field appearance="fill">
+      <mat-label>Enter life stage name</mat-label>
+      <input matInput placeholder="Neonate Foal" [formControl]="name" required />
+      @if (name.invalid && name.touched){
+      <mat-error>You must enter a value</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>nutritional_requirements</mat-label>
+      <textarea matInput placeholder="Reliant on mother's milk for nutrition" [formControl]="nutritionalRequirements" required></textarea>
+      @if (nutritionalRequirements.invalid && nutritionalRequirements.touched){
+      <mat-error>You must enter a value</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Age range</mat-label>
+      <mat-select [formControl]="ageRange" required>
+        <mat-option>--</mat-option>
+        @for (item of ageRanges; track $index) {
+          <mat-option [value]="item">{{ item }}</mat-option>
+        }
+      </mat-select>
+      @if (ageRange.hasError('required')) {
+      <mat-error>Please choose an age range</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Work level</mat-label>
+      <mat-select [formControl]="workLevel" required>
+        <mat-option>--</mat-option>
+        @for (item of workLevels; track $index) {
+          <mat-option [value]="item">{{ item }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Gestation stage</mat-label>
+      <mat-select [formControl]="gestationStage" required>
+        <mat-option>--</mat-option>
+        @for (item of gestationStages; track $index) {
+          <mat-option [value]="item">{{ item }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      [disabled]="lifeStageForm.invalid"
+      disabledInteractive
+      matTooltip="Fill required information"      
+    >
+      Save
+    </button>
+  </form>
+</div>

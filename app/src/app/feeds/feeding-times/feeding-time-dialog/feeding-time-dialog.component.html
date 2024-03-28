@@ -1,0 +1,59 @@
+<div class="container">
+  <form [formGroup]="feedignTimeForm" (ngSubmit)="saveUnit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Early morning" [formControl]="name" required />
+      @if (name.invalid && name.touched){
+      <mat-error>You must enter a value</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Time</mat-label>
+      <input matInput placeholder="7:00" [formControl]="time" required />
+      @if (time.invalid && time.touched){
+      <mat-error>You must enter a value</mat-error>
+      }
+    </mat-form-field>
+
+
+    <button
+      mat-raised-button
+      [disabled]="feedignTimeForm.invalid"
+      disabledInteractive
+      matTooltip="Fill required information"      
+    >
+      Save
+    </button>
+  </form>
+</div>
+
+
+<!-- // Nuttrion Module
+
+  // Feeds
+    // Catogires
+        // Hay
+        // Forgaes
+        // 
+  // Meals
+    // Categories
+      // Conectrations meals
+      // Hay 
+  // Programs
+    // Categories
+  // Food Configs
+    // Units
+    // Life Stages
+      // 
+    // Feeding times
+
+Horse moduel
+    // Horse
+
+System config
+  // Life stages
+  // Units
+  //  -->
+
+    

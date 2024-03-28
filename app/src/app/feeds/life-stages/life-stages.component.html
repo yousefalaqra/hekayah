@@ -1,0 +1,13 @@
+<button mat-raised-button (click)="openDialog()">Add</button>
+
+<h3>Life stages</h3>
+
+<mat-list>
+  @for (lifeStage of $lifeStages(); track lifeStage._id) {
+  <mat-list-item role="listitem">
+    {{ lifeStage.age_range }} ({{
+      lifeStage.nutritional_requirements
+    }})</mat-list-item
+  >
+  }
+</mat-list>

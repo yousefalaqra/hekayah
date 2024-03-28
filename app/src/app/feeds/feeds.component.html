@@ -12,6 +12,18 @@
         <div matListItemTitle>Units</div>
         <div matListItemLine>Modify your horses' feed units</div>
       </mat-list-item>
+
+      <mat-list-item (click)="goTo('life-stages')">
+        <mat-icon matListItemIcon>timeline</mat-icon>
+        <div matListItemTitle>Life stages</div>
+        <div matListItemLine>Modify your horses' life stages</div>
+      </mat-list-item>
+
+      <mat-list-item (click)="goTo('feeding-times')">
+        <mat-icon matListItemIcon>access_time</mat-icon>
+        <div matListItemTitle>Feeding times</div>
+        <div matListItemLine>Modify your horses' feeding times</div>
+      </mat-list-item>
       <mat-divider></mat-divider>
     </mat-list>
   </mat-drawer>

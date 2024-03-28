@@ -1,0 +1,12 @@
+<button mat-raised-button (click)="openDialog()">Add</button>
+
+<h3>Feeding times</h3>
+
+<mat-list>
+  @for (feedingTime of $feedingTimes(); track feedingTime._id) {
+  <mat-list-item role="listitem">
+    {{ feedingTime.name }} ({{ feedingTime.time }})</mat-list-item
+  >
+  }
+</mat-list>
+

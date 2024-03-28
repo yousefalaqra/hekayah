@@ -7,14 +7,14 @@ export const createUnit = async (req: Request, res: Response) => {
   try {
     const { name, abbreviation, type } = req.body;
 
-    const feed = new UnitModel({
+    const unit = new UnitModel({
       name: name,
       abbreviation: abbreviation,
       type,
     });
 
-    await feed.save();
-    res.status(201).json(feed);
+    await unit.save();
+    res.status(201).json(unit);
   } catch (error: any) {
     res.status(500).json({ message: error.message });
   }
@@ -22,8 +22,8 @@ export const createUnit = async (req: Request, res: Response) => {
 
 export const getAllUnits = async (req: Request, res: Response) => {
   try {
-    const feeds = await UnitModel.find().exec();
-    res.status(200).json(feeds);
+    const units = await UnitModel.find().exec();
+    res.status(200).json(units);
   } catch (error: any) {
     res.status(500).json({ message: error.message });
   }
