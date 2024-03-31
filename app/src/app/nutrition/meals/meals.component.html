@@ -1,17 +1,7 @@
 <mat-drawer-container class="container" [hasBackdrop]="false">
-  <mat-drawer #drawer [mode]="'push'" [opened]="true">
+  <mat-drawer #drawer [mode]="'side'" [opened]="true">
     <mat-list>
-      <div mat-subheader (click)="goTo('')">Feeds</div>
-      <mat-list-item (click)="goTo('brands')">
-        <mat-icon matListItemIcon>store</mat-icon>
-        <div matListItemTitle>Brands</div>
-        <div matListItemLine>Modify your horses' feed brands</div>
-      </mat-list-item>
-      <mat-list-item (click)="goTo('units')">
-        <mat-icon matListItemIcon>swap_horiz</mat-icon>
-        <div matListItemTitle>Units</div>
-        <div matListItemLine>Modify your horses' feed units</div>
-      </mat-list-item>
+      <div mat-subheader (click)="goTo('')">Meals</div>
 
       <mat-list-item (click)="goTo('life-stages')">
         <mat-icon matListItemIcon>timeline</mat-icon>

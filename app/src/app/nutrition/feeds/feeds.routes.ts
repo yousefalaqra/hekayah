@@ -5,8 +5,6 @@ import { CreateFeedComponent } from './create-feed/create-feed.component';
 import { FeedsListComponent } from './feeds-list/feeds-list.component';
 import { BrandsComponent } from './brands/brands.component';
 import {  UnitsComponent} from './units/units.component';
-import { LifeStagessComponent } from './life-stages/life-stages.component';
-import { FeedingTimesComponent } from './feeding-times/feeding-time.component';
 
 export const FEED_ROUTES: Route[] = [
   {
@@ -17,8 +15,6 @@ export const FEED_ROUTES: Route[] = [
       { path: 'new', component: CreateFeedComponent },
       { path: 'brands', component: BrandsComponent },
       { path: 'units', component: UnitsComponent },
-      { path: 'life-stages', component: LifeStagessComponent },
-      { path: 'feeding-times', component: FeedingTimesComponent },
       { path: ':feedId', component: FeedDetailsComponent },
     ],
   },

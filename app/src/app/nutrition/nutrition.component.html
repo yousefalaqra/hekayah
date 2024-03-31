@@ -1,0 +1,20 @@
+<mat-drawer-container class="container" autosize>
+  <mat-drawer #drawer class="sidenav" mode="side" [opened]="true">
+    <button mat-menu-item (click)="goTo('feeds')">
+      <mat-icon>scatter_plot</mat-icon>
+      <span>Feeds</span>
+    </button>
+    <button mat-menu-item (click)="goTo('meals')">
+      <mat-icon>widgets</mat-icon>
+      <span>Meals</span>
+    </button>
+    <button mat-menu-item (click)="goTo('programs')">
+      <mat-icon>view_quilt</mat-icon>
+      <span> Programs</span>
+    </button>
+  </mat-drawer>
+
+  <mat-drawer-content>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>

@@ -6,3 +6,4 @@ export * from './brand'; // Export all models, including Feed
 export * from './unit'
 export * from './life-stage'
 export * from './feeding-time'
+export * from './meal'

@@ -12,9 +12,9 @@ import { switchMap } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatDividerModule } from '@angular/material/divider';
-import { LifeStage, LifeStageModel } from '../../models/life-stage';
-import { LifeStageService } from '../../services/life-stage.service';
-import { LifeStageStore } from '../../store/life-stage.store';
+import { LifeStage, LifeStageModel } from '../../../models/life-stage';
+import { LifeStageService } from '../../../services/life-stage.service';
+import { LifeStageStore } from '../../../store/life-stage.store';
 import { LifeStageDialogComponent } from './life-stage-dialog/life-stage-dialog.component';
 
 @UntilDestroy()

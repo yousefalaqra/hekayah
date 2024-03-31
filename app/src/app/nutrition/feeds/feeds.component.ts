@@ -20,6 +20,6 @@ export class FeedsComponent implements OnInit {
   ngOnInit(): void {}
 
   goTo(routeId: string): void {
-    this.router.navigate([`/feeds/${routeId}`]); // Route with ID parameter
+    this.router.navigate([`/nutrition/feeds/${routeId}`]); // Route with ID parameter
   }
 }

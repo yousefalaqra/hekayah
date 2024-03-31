@@ -25,8 +25,9 @@ export const MealPortionModel = mongoose.model<MealPortion>(
 
 export interface Meal {
   name: string;
-  life_stage: { type: LifeStage; required: true; ref: "LifeStage" };
-  feeding_time: { type: FeedingTime; required: true; ref: "FeedingTime" };
+  category: MealCateoory
+  life_stage: LifeStage;
+  feeding_time: FeedingTime;
   prep_method: string;
   portions: Array<MealPortion>;
   note: string;

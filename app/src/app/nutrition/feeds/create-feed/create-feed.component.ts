@@ -7,11 +7,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { FeedService } from '../../services/feed.service';
-import { FeedStore } from '../../store/feed.store';
+import { FeedService } from '../../../services/feed.service';
+import { FeedStore } from '../../../store/feed.store';
 import { MatButtonModule } from '@angular/material/button';
-import { UnitService } from '../../services/unit.service';
-import { UnitStore } from '../../store/unit.store';
+import { UnitService } from '../../../services/unit.service';
+import { UnitStore } from '../../../store/unit.store';
 import {
   FormControl,
   FormGroup,
@@ -19,8 +19,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { RequiredErrorStateMatcher } from '../../utils/form.utils';
-import { Category, FeedModel } from '../../models/feeds';
+import { RequiredErrorStateMatcher } from '../../../utils/form.utils';
+import { FeedCategory, FeedModel } from '../../../models/feeds';
 import { Router } from '@angular/router';
 
 @UntilDestroy()
@@ -48,14 +48,14 @@ import { Router } from '@angular/router';
   styleUrl: './create-feed.component.scss',
 })
 export class CreateFeedComponent implements OnInit {
-  $brands = this.feedStore.brands;
+  $brands = this.feedStore.$brands;
   categories = this.feedStore.feedCatgories;
   $volumeUnits = this.unitStore.$volumeUnits;
   $weightUnits = this.unitStore.$weightUnits;
 
   feedForm = new FormGroup({
     name: new FormControl('', Validators.required),
-    category: new FormControl(Category, Validators.required),
+    category: new FormControl(FeedCategory, Validators.required),
     brand: new FormControl('', Validators.required),
     quantity: new FormGroup({
       amount: new FormControl(0, Validators.required),
@@ -110,7 +110,7 @@ export class CreateFeedComponent implements OnInit {
     const feedModel: FeedModel = {
       name: this.name.value!,
       brand: this.brand.value!,
-      category: this.category.value! as unknown as Category,
+      category: this.category.value! as unknown as FeedCategory,
       note: this.note.value!,
       quantity: {
         amount: this.quantity.value.amount!,

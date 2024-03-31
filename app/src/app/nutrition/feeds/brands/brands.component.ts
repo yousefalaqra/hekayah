@@ -4,9 +4,9 @@ import { MatListModule } from '@angular/material/list';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { FeedStore } from '../../store/feed.store';
-import { FeedService } from '../../services/feed.service';
-import { Brand } from '../../models/feeds';
+import { FeedStore } from '../../../store/feed.store';
+import { FeedService } from '../../../services/feed.service';
+import { Brand } from '../../../models/feeds';
 
 import {
   MatDialog,
@@ -32,7 +32,7 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './brands.component.scss',
 })
 export class BrandsComponent implements OnInit {
-  brands: Signal<Array<Brand>> = this.feedsStore.brands;
+  brands: Signal<Array<Brand>> = this.feedsStore.$brands;
 
   private recentCreatedBrandId = '';
 

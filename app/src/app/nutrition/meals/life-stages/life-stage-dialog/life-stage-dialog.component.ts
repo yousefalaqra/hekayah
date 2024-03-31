@@ -12,9 +12,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { UnitType } from '../../../models/unit';
+import { UnitType } from '../../../../models/unit';
 import { MatSelectModule } from '@angular/material/select';
-import { AgeRange, GestationStage, WorkLevel } from '../../../models/life-stage';
+import { AgeRange, GestationStage, WorkLevel } from '../../../../models/life-stage';
 
 @UntilDestroy()
 @Component({

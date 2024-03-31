@@ -3,8 +3,8 @@ import { MatListModule } from '@angular/material/list';
 
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { HttpClientModule } from '@angular/common/http';
-import { UnitStore } from '../../store/unit.store';
-import { UnitService } from '../../services/unit.service';
+import { UnitStore } from '../../../store/unit.store';
+import { UnitService } from '../../../services/unit.service';
 
 import {
   MatDialog,
@@ -18,7 +18,7 @@ import {
 } from '@angular/material/dialog';
 import { switchMap } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
-import { Unit, UnitModel, UnitType } from '../../models/unit';
+import { Unit, UnitModel, UnitType } from '../../../models/unit';
 import { UnitDialogComponent } from './unit-dialog/unit-dialog.component';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatDividerModule } from '@angular/material/divider';

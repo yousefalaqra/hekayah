@@ -12,9 +12,9 @@ import { switchMap } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatDividerModule } from '@angular/material/divider';
-import { FeedingTime, FeedingTimeModel } from '../../models/feeding-time';
-import { FeedingTimeService } from '../../services/feeding-time.service';
-import { FeedingTimeStore } from '../../store/feeding-time.store';
+import { FeedingTime, FeedingTimeModel } from '../../../models/feeding-time';
+import { FeedingTimeService } from '../../../services/feeding-time.service';
+import { FeedingTimeStore } from '../../../store/feeding-time.store';
 import { FeedingTimeDialogComponent } from './feeding-time-dialog/feeding-time-dialog.component';
 
 @UntilDestroy()

@@ -4,9 +4,9 @@ import { MatListModule } from '@angular/material/list';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { FeedService } from '../../services/feed.service';
-import { FeedStore } from '../../store/feed.store';
-import { Feed } from '../../models/feeds';
+import { FeedService } from '../../../services/feed.service';
+import { FeedStore } from '../../../store/feed.store';
+import { Feed } from '../../../models/feeds';
 import { MatButtonModule } from '@angular/material/button';
 
 
@@ -21,7 +21,7 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './feeds-list.component.scss',
 })
 export class FeedsListComponent implements OnInit {
-  feeds: Signal<Array<Feed>> = this.feedsStore.feeds;
+  feeds: Signal<Array<Feed>> = this.feedsStore.$feeds;
 
   constructor(
     private feedsService: FeedService,
@@ -40,11 +40,11 @@ export class FeedsListComponent implements OnInit {
   }
 
   goToFeed(feedId: string): void{
-    this.router.navigate(['/feeds', feedId]); // Route with ID parameter   
+    this.router.navigate(['/nutrition/feeds', feedId]); // Route with ID parameter   
   }
   
   goToNew(): void{
-    this.router.navigate(['/feeds/new']); // Route with ID parameter   
+    this.router.navigate(['/nutrition/feeds/new']); // Route with ID parameter   
 
   }
 }

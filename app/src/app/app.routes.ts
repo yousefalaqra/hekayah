@@ -2,8 +2,8 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
-    path: 'feeds',
+    path: 'nutrition',
     loadChildren: () =>
-      import('./feeds/routes').then((mod) => mod.FEED_ROUTES),
+      import('./nutrition/nutrition.routes').then((mod) => mod.NUTRITION_ROUTES),
   },
 ];

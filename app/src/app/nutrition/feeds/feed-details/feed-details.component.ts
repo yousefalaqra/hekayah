@@ -1,9 +1,9 @@
 import { Component, Input, OnInit, Signal, signal } from '@angular/core';
 
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { FeedService } from '../../services/feed.service';
-import { FeedStore } from '../../store/feed.store';
-import { Feed } from '../../models/feeds';
+import { FeedService } from '../../../services/feed.service';
+import { FeedStore } from '../../../store/feed.store';
+import { Feed } from '../../../models/feeds';
 import { HttpClientModule } from '@angular/common/http';
 
 @UntilDestroy()
@@ -16,7 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
   styleUrl: './feed-details.component.scss',
 })
 export class FeedDetailsComponent implements OnInit {
-  activeFeed: Signal<Feed | undefined> = this.feedStore.activeFeed;
+  activeFeed: Signal<Feed | undefined> = this.feedStore.$activeFeed;
   @Input()
   set feedId(feedId: string) {
     this.feedService

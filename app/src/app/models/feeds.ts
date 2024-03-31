@@ -5,15 +5,22 @@ export interface Feed {
   name: string;
   brand?: Brand;
   quantity?: Quantity;
-  category?: Category;
+  category?: FeedCategory;
   note?: string;
+}
+
+export enum FeedCategory{
+  forages = "Forages", 
+  grains  ="Grains", 
+  balancers_supplements = "Balancers & Supplements",
+  complete_feeds ="Complete Feeds"
 }
 
 export interface FeedModel {
   name: string;
   brand: string;
   quantity: QuantityModel;
-  category: Category;
+  category: FeedCategory;
   note?: string;
 }
 
@@ -30,12 +37,4 @@ export interface QuantityModel {
 export interface Quantity {
   amount: number;
   unit: Unit;
-}
-
-
-export enum Category {
-  forages = 'Forages',
-  grains = 'Grains',
-  balancers_supplements = 'Balancers & Supplements',
-  complete_feeds = 'Complete Feeds',
 }
