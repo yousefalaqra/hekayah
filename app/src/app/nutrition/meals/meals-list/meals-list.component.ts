@@ -9,7 +9,6 @@ import { MealStore } from '../../../store/meal.store';
 import { MealService } from '../../../services/meal.service';
 import { Meal } from '../../../models/meal';
 
-
 @UntilDestroy()
 @Component({
   selector: 'meals-list',
@@ -38,11 +37,18 @@ export class MealsListComponent implements OnInit {
       });
   }
 
-  goToMeal(mealId: string): void{
-    this.router.navigate(['/nutrition/meals', mealId]); // Route with ID parameter   
+  goToMeal(mealId: string): void {
+    this.router.navigate(['/nutrition/meals', mealId]); // Route with ID parameter
   }
-  
-  goToNew(): void{
-    this.router.navigate(['nutrition/meals/new']); // Route with ID parameter   
+
+  goToNew(): void {
+    this.mealService
+      .createMeal({ name: 'Untitled meal' })
+      .pipe(untilDestroyed(this))
+      .subscribe({
+        next: (meal) => {
+          this.router.navigate(['/nutrition/meals', meal._id]); // Route with ID parameter
+        },
+      });
   }
 }

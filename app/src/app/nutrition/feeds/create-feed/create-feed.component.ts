@@ -20,8 +20,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { RequiredErrorStateMatcher } from '../../../utils/form.utils';
-import { FeedCategory, FeedModel } from '../../../models/feeds';
+import { FeedCategory, FeedModel, QuantityModel } from '../../../models/feeds';
 import { Router } from '@angular/router';
+import { QuantityFormComponent } from '../quantity/quantity-form/quantity-form.component';
 
 @UntilDestroy()
 @Component({
@@ -35,6 +36,7 @@ import { Router } from '@angular/router';
     MatFormFieldModule,
     ReactiveFormsModule,
     MatButtonModule,
+    QuantityFormComponent
   ],
   providers: [
     FeedService,
@@ -53,14 +55,12 @@ export class CreateFeedComponent implements OnInit {
   $volumeUnits = this.unitStore.$volumeUnits;
   $weightUnits = this.unitStore.$weightUnits;
 
+  quantityModel?: QuantityModel;
+
   feedForm = new FormGroup({
     name: new FormControl('', Validators.required),
     category: new FormControl(FeedCategory, Validators.required),
     brand: new FormControl('', Validators.required),
-    quantity: new FormGroup({
-      amount: new FormControl(0, Validators.required),
-      unit: new FormControl('', Validators.required),
-    }),
     note: new FormControl(''),
   });
 
@@ -92,11 +92,7 @@ export class CreateFeedComponent implements OnInit {
 
   get category() {
     return this.feedForm.controls['category'];
-  }
-
-  get quantity() {
-    return this.feedForm.controls['quantity'];
-  }
+  }  
 
   get brand() {
     return this.feedForm.controls['brand'];
@@ -112,10 +108,7 @@ export class CreateFeedComponent implements OnInit {
       brand: this.brand.value!,
       category: this.category.value! as unknown as FeedCategory,
       note: this.note.value!,
-      quantity: {
-        amount: this.quantity.value.amount!,
-        unit: this.quantity.value.unit!,
-      },
+      quantity: this.quantityModel!        
     };
 
     this.feedService
@@ -123,7 +116,7 @@ export class CreateFeedComponent implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe({
         next: (feed) => {
-          this.router.navigate(['/feeds'])          
+          this.router.navigate(['/nutrition/feeds'])          
         },
         error: (err) => {
          

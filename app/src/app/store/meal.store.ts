@@ -1,7 +1,7 @@
 import { Injectable, Signal, WritableSignal, signal } from '@angular/core';
 
 import { v4 as uuidv4 } from 'uuid';
-import { Meal, MealCategory, MealModel } from '../models/meal';
+import { Meal, MealCategory, MealModel, MealPortionModel } from '../models/meal';
 
 @Injectable()
 export class MealStore {
@@ -26,27 +26,15 @@ export class MealStore {
     this.activeMeal.set(meal);
   }
 
-  //   addMeal(meal: MealModel) {
-  //     const id = uuidv4();
-
-  //     this.meals.update((state) => {
-  //       return [
-  //         ...state,
-  //         {_id: id,  name: meal.name, }
-
-  //       ];
-  //     });
-
-  //     return id;
-  //   }
-
-  //   onAddFeedSuccess(currentId: string, feed: Feed) {
-  //     this.$feeds.update((state) =>
-  //       state.map((x) => (x._id === currentId ? feed : x))
-  //     );
-  //   }
-
-  //   onAddFeedFailure(currentId: string) {
-  //     this.$feeds.update((state) => state.filter((x) => x._id !== currentId));
-  //   }
+  addMealPortition(mealPortition: MealPortionModel) {
+    this.activeMeal.update(value => {
+      if(value){
+        const currentPortitions = value?.portions || [];
+        const updatedPortitions = currentPortitions.concat({feed: mealPortition.feed, quantity: mealPortition.quantity});
+        return {...value, portions: updatedPortitions}
+      }else{
+        return undefined;
+      }
+    })
+  }
 }

@@ -1,0 +1,101 @@
+<mat-drawer-container  class="container" [hasBackdrop]="'false'">
+  <mat-drawer class="sidenav"  #mealDrawer [position]="'end'" [mode]="'over'">Modify meal portions
+  
+  
+    <meal-portitions></meal-portitions>
+
+  </mat-drawer>
+  <mat-drawer-content>
+    <form [formGroup]="mealForm" (ngSubmit)="saveMeal()">
+      <mat-form-field>
+        <mat-label>Meal name</mat-label>
+        <input
+          type="text"
+          matInput
+          [formControl]="name"
+          [errorStateMatcher]="matcher"
+          placeholder="Breakfast"
+        />
+        @if (name.hasError('required')) {
+        <mat-error>Meal name is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Meal category</mat-label>
+        <mat-select [formControl]="category">
+          <mat-option>--</mat-option>
+          @for (category of mealCategories; track category) {
+          <mat-option [value]="category">{{ category }}</mat-option>
+          }
+        </mat-select>
+        @if (category.hasError('required')) {
+        <mat-error>Please choose a meal category</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Feeding time</mat-label>
+        <mat-select [formControl]="feedingTime" required>
+          <mat-option>--</mat-option>
+          @for (time of $feedingTimes(); track time._id) {
+          <mat-option [value]="time._id"
+            >{{ time.name }} ({{ time.time }})</mat-option
+          >
+          }
+        </mat-select>
+        @if (lifeStage.hasError('required')) {
+        <mat-error>Please choose the meal feeding time</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Life stage</mat-label>
+        <mat-select [formControl]="lifeStage">
+          <mat-option>--</mat-option>
+          @for (stage of $lifeStages(); track stage._id) {
+          <mat-option [value]="stage._id"
+            >{{ stage.age_range }} ({{ stage.work_level }};
+            {{ stage.gestation_stage }})</mat-option
+          >
+          }
+        </mat-select>
+        @if (lifeStage.hasError('required')) {
+        <mat-error>Please choose a meal horse life stage</mat-error>
+        }
+      </mat-form-field>
+
+      <section>
+        Meal portions
+
+        <button mat-raised-button (click)="togglePortionsSidenav($event)">
+          Adjust portions
+        </button>
+
+        @for (portion of $activeMeal()?.portions; track portion.feed._id) {
+        {{ portion.feed.name }} ({{ portion.quantity.amount }}/{{
+          portion.quantity.unit
+        }}) }
+      </section>
+
+      <mat-form-field>
+        <mat-label>Preparation method</mat-label>
+        <textarea matInput [formControl]="prepMethod"></textarea>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Additional notes</mat-label>
+        <textarea matInput [formControl]="note"></textarea>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        [disabled]="mealForm.invalid"
+        disabledInteractive
+        matTooltip="Fill required information"
+      >
+        Save
+      </button>
+    </form>
+  </mat-drawer-content>
+</mat-drawer-container>

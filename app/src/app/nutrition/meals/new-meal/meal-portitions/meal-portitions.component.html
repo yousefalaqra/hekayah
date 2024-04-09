@@ -1,0 +1,8 @@
+<mat-list class="list" role="list">
+  @for (feed of $feeds(); track feed._id) {
+      <meal-portition-item
+        [feed]="feed"
+        (mealPortitionAdd)="addMealPortition($event)"
+      ></meal-portition-item>
+  }
+</mat-list>

@@ -1,0 +1,12 @@
+.form-container {
+    display: flex;
+    width: 100%;
+
+    flex-direction: row; /* Adjust for column layout if needed */
+    gap: 5px; /* Optional gap between form fields */
+    
+    justify-content: center;    
+    align-items: center;
+    
+  }
+

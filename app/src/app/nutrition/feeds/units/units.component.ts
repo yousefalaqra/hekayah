@@ -40,7 +40,7 @@ import { MatDividerModule } from '@angular/material/divider';
   styleUrl: './units.component.scss',
 })
 export class UnitsComponent implements OnInit {
-  $units: Signal<Array<Unit>> = this.unitStore.units;
+  $units: Signal<Array<Unit>> = this.unitStore.$units;
   $volumeUnits = this.unitStore.$volumeUnits
   $weightUnits = this.unitStore.$weightUnits
 

@@ -41,9 +41,9 @@ interface LifeStage extends Document {
 
 // Define the Mongoose schema
 const LifeStageSchema = new Schema<LifeStage>({
-  name: { type: String, required: true },
-  age_range: { type: String, required: true },
-  nutritional_requirements: { type: String, required: true },
+  name: { type: String },
+  age_range: { type: String },
+  nutritional_requirements: { type: String },
   work_level: {
     type: String,
     enum: Object.values(WorkLevel),

@@ -1,0 +1,20 @@
+<div class="item">
+  <div class="info">
+    <div class="name-category">{{ feed.name }}; {{ feed.category }}</div>
+
+    <quantity-form
+      class="qt"
+      [defaultQuantity]="feed.quantity"
+      [size]="'small'"
+      (quantityFormGroup)="updateMealPortionQuantity($event)"
+    ></quantity-form>
+  </div>
+  <button
+    (click)="addPortition()"
+    mat-icon-button
+    matTooltip="Click to add feed to meal"
+    aria-label="Add feed to meal portions icon"
+  >
+    <mat-icon>playlist_add</mat-icon>
+  </button>
+</div>

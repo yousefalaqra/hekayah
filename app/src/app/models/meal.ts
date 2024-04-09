@@ -1,4 +1,5 @@
 import { FeedingTime } from './feeding-time';
+import { Feed, QuantityModel } from './feeds';
 import { LifeStage } from './life-stage';
 
 export enum MealCategory {
@@ -6,9 +7,15 @@ export enum MealCategory {
   concentrate = 'Concentrate',
 }
 
+
 export interface MealPortion {
-  feedId: string;
-  quantity: string;
+  feed: Feed;
+  quantity: QuantityModel;
+}
+
+export interface MealPortionModel {
+  feed: Feed;
+  quantity: QuantityModel;
 }
 
 export interface Meal {
@@ -24,10 +31,10 @@ export interface Meal {
 
 export interface MealModel {
   name: string;
-  category: MealCategory;
-  life_stage: LifeStage;
-  feeding_time: FeedingTime;
-  prep_method: string;
-  portions: Array<MealPortion>;
-  note: string;
+  category?: MealCategory;
+  life_stage?: LifeStage;
+  feeding_time?: FeedingTime;
+  prep_method?: string;
+  portions?: Array<MealPortion>;
+  note?: string;
 }

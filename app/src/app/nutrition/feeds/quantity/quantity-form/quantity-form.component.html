@@ -1,0 +1,21 @@
+<form class="form-container" [formGroup]="quantityForm">
+  <mat-form-field class="form-field" [subscriptSizing]="'dynamic'" [ngStyle]="currentStyles">
+    <mat-label>Amount</mat-label>
+    <input
+      type="number"
+      matInput
+      [formControl]="amount"
+      [errorStateMatcher]="matcher"
+      placeholder="10"
+    />
+    @if (amount.hasError('required') && fieldSize !== 'small') {
+    <mat-error>Quantity amount is <strong>required</strong></mat-error>
+    }
+  </mat-form-field>
+
+  <unit-control
+    [unitId]="defaultQuantity?.unit"
+    [size]="'small'"
+    (unitChanged)="updateUnitValue($event)"
+  ></unit-control>
+</form>

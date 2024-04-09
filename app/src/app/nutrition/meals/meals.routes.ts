@@ -3,7 +3,7 @@ import { MealsComponent } from './meals.component';
 import { MealsListComponent } from './meals-list/meals-list.component';
 import { LifeStagessComponent } from './life-stages/life-stages.component';
 import { FeedingTimesComponent } from './feeding-times/feeding-time.component';
-
+import { MealComponent } from './new-meal/meal.component';
 
 export const MEALS_ROUTES: Route[] = [
   {
@@ -14,7 +14,7 @@ export const MEALS_ROUTES: Route[] = [
       // { path: 'new', component: CreateFeedComponent },
       { path: 'life-stages', component: LifeStagessComponent },
       { path: 'feeding-times', component: FeedingTimesComponent },
-      // { path: ':mealId', component: FeedDetailsComponent },
+      { path: ':mealId', component: MealComponent },
     ],
   },
 ];

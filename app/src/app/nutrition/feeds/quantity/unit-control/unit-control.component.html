@@ -1,0 +1,62 @@
+<mat-form-field [ngStyle]="currentStyles" class="form-field" [subscriptSizing]="'dynamic'">
+  <mat-label>Unit</mat-label>
+  <mat-select [formControl]="unit">
+    <mat-option>-- None --</mat-option>
+
+
+    <!-- This condtion to prevent convertation between unit types -->
+    @if ((defaultUnit?.type === unitTypes.weight) || !defaultUnit) {
+
+      @if(defaultUnit){
+          @for (unit of $weightUnits(); track unit._id) {
+          <mat-option [value]="unit._id">
+            @if(showFullUnit){
+            {{ unit.name }} ({{ unit.abbreviation }}) }@else{
+            {{ unit.abbreviation }}
+            }
+          </mat-option>
+          }
+      }@else{
+        <mat-optgroup [label]="'Weight-based Units'">
+          @for (unit of $weightUnits(); track unit._id) {
+          <mat-option [value]="unit._id">
+            @if(showFullUnit){
+            {{ unit.name }} ({{ unit.abbreviation }}) }@else{
+            {{ unit.abbreviation }}
+            }
+          </mat-option>
+          }
+        </mat-optgroup>
+      }
+   
+    <!-- This condtion to prevent convertation between unit types -->
+    } @if ((defaultUnit?.type === unitTypes.volume) || !defaultUnit) {
+
+      @if (defaultUnit) {
+          @for (unit of $volumeUnits(); track unit._id) {
+          <mat-option [value]="unit._id">
+            @if(showFullUnit){
+            {{ unit.name }} ({{ unit.abbreviation }}) }@else{
+            {{ unit.abbreviation }}
+            }
+          </mat-option>
+          }
+      }@else {
+        <mat-optgroup [label]="'Volume-based Units'">
+          @for (unit of $volumeUnits(); track unit._id) {
+          <mat-option [value]="unit._id">
+            @if(showFullUnit){
+            {{ unit.name }} ({{ unit.abbreviation }}) }@else{
+            {{ unit.abbreviation }}
+            }
+          </mat-option>
+          }
+        </mat-optgroup>
+      }
+    
+    }
+  </mat-select>
+  @if (unit.hasError('required') && fieldSize !== 'small') {
+  <mat-error>Please choose the amount unit of measurement</mat-error>
+  }
+</mat-form-field>

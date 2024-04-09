@@ -6,21 +6,15 @@ import { LifeStageModel } from "../models"; // Automatically looks for index.ts
 export const createLifeStage = async (req: Request, res: Response) => {
   try {
     const {
-      name,
       age_range,
-      foal_age_range,
-      nutritional_requirements,
-      activity_level,
-      pregnancy_trimester,
+      work_level,
+      gestation_stage,
     } = req.body;
 
     const lifeStage = new LifeStageModel({
-      name: name,
       age_range: age_range,
-      foal_age_range: foal_age_range,
-      nutritional_requirements: nutritional_requirements,
-      activity_level: activity_level,
-      pregnancy_trimester: pregnancy_trimester,
+      work_level: work_level,
+      gestation_stage: gestation_stage,
     });
 
     await lifeStage.save();

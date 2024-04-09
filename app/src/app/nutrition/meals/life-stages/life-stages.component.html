@@ -5,9 +5,8 @@
 <mat-list>
   @for (lifeStage of $lifeStages(); track lifeStage._id) {
   <mat-list-item role="listitem">
-    {{ lifeStage.age_range }} ({{
-      lifeStage.nutritional_requirements
-    }})</mat-list-item
+    {{ lifeStage.age_range }} ({{ lifeStage.work_level }};
+    {{ lifeStage.gestation_stage }})</mat-list-item
   >
   }
 </mat-list>

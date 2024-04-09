@@ -1,0 +1,9 @@
+.list {
+  width: 100%;
+
+
+
+  display: flex;
+  flex-direction: column; /* Adjust for column layout if needed */
+  gap: 10px; /* Optional gap between form fields */
+}

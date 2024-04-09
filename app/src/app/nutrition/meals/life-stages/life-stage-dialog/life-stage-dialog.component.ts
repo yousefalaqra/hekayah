@@ -32,9 +32,9 @@ import { AgeRange, GestationStage, WorkLevel } from '../../../../models/life-sta
 })
 export class LifeStageDialogComponent implements OnInit {
   lifeStageForm = new FormGroup({
-    name: new FormControl('', Validators.required),
+    name: new FormControl(''),
+    nutritional_requirements: new FormControl(''),
     age_range: new FormControl('', Validators.required),
-    nutritional_requirements: new FormControl('', Validators.required),
     work_level: new FormControl(WorkLevel),
     gestation_stage: new FormControl(GestationStage),
   });

@@ -35,9 +35,9 @@ export interface Meal {
 
 const MealSchema: Schema = new Schema({
   name: { type: String, required: true },
+  category: { type: MealCateoory },
   life_stage: { type: Schema.Types.ObjectId, ref: "LifeStage" },
   feeding_time: { type: Schema.Types.ObjectId, ref: "FeedingTime" },
-  category: { type: MealCateoory, required: true },
   portions: [{ type: MealPortionSchema, ref: "MealPortion" }],
   prep_method: { type: String },
   note: { type: String },
