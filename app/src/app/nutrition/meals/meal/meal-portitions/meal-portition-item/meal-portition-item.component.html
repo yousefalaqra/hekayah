@@ -3,12 +3,25 @@
     <div class="name-category">{{ feed.name }}; {{ feed.category }}</div>
 
     <quantity-form
+      [disableQuantity]="added"
       class="qt"
       [defaultQuantity]="feed.quantity"
       [size]="'small'"
-      (quantityFormGroup)="updateMealPortionQuantity($event)"
+      (quantityChanged)="updateMealPortionQuantity($event)"
     ></quantity-form>
   </div>
+
+  @if (added) {
+  <button
+    mat-icon-button
+    matTooltip="Feed was added"
+    aria-label="Feed added check"
+    [disabled]="true"
+  >
+    <mat-icon>playlist_add_check</mat-icon>
+  </button>
+
+  }@else {
   <button
     (click)="addPortition()"
     mat-icon-button
@@ -17,4 +30,5 @@
   >
     <mat-icon>playlist_add</mat-icon>
   </button>
+  }
 </div>

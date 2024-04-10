@@ -2,12 +2,8 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnChanges,
   OnInit,
   Output,
-  SimpleChanges,
-  computed,
-  effect,
 } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
 
@@ -19,7 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import {
   FormControl,
-  FormGroup,
+
   FormsModule,
   ReactiveFormsModule,
   Validators,
@@ -69,6 +65,14 @@ export class UnitControlComponent implements OnInit {
 
   showFullUnit = true;
 
+  @Input() set disabled(val: boolean) {
+    if (val) {
+      this.unit.disable();
+    } else {
+      this.unit.enable();
+    }
+  }
+
   defaultUnit?: Unit;
   @Input() unitId?: Unit;
   @Input()
@@ -100,7 +104,6 @@ export class UnitControlComponent implements OnInit {
   }
 
   @Output() unitChanged = new EventEmitter<Unit>();
-  @Output() quantityFormControl = new EventEmitter<FormControl>();
 
   constructor(private unitService: UnitService, private unitStore: UnitStore) {}
 
@@ -109,8 +112,10 @@ export class UnitControlComponent implements OnInit {
       next: (val) => {
         this.units = val;
 
-        this.defaultUnit = this.units.find((x) => x._id === this.unitId as unknown  as string);
-        this.unit.setValue(this.defaultUnit?._id!)
+        this.defaultUnit = this.units.find(
+          (x) => x._id === (this.unitId as unknown as string)
+        );
+        this.unit.setValue(this.defaultUnit?._id!);
       },
     });
 

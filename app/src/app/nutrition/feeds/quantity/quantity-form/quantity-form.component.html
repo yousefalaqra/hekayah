@@ -1,8 +1,9 @@
-<form class="form-container" [formGroup]="quantityForm">
-  <mat-form-field class="form-field" [subscriptSizing]="'dynamic'" [ngStyle]="currentStyles">
+<div class="container">
+  <mat-form-field  class="form-field" [subscriptSizing]="'dynamic'" [ngStyle]="currentStyles">
     <mat-label>Amount</mat-label>
     <input
       type="number"
+      [readonly]="disabled"
       matInput
       [formControl]="amount"
       [errorStateMatcher]="matcher"
@@ -15,7 +16,8 @@
 
   <unit-control
     [unitId]="defaultQuantity?.unit"
-    [size]="'small'"
+    [size]="fieldSize"
     (unitChanged)="updateUnitValue($event)"
+    [disabled]="disabled"
   ></unit-control>
-</form>
+</div>

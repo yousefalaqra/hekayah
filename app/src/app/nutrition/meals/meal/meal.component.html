@@ -1,9 +1,8 @@
-<mat-drawer-container  class="container" [hasBackdrop]="'false'">
-  <mat-drawer class="sidenav"  #mealDrawer [position]="'end'" [mode]="'over'">Modify meal portions
-  
-  
-    <meal-portitions></meal-portitions>
+<mat-drawer-container class="container" [hasBackdrop]="'false'">
+  <mat-drawer class="sidenav" #mealDrawer [position]="'end'" [mode]="'over'"
+    >Modify meal portions
 
+    <meal-portitions></meal-portitions>
   </mat-drawer>
   <mat-drawer-content>
     <form [formGroup]="mealForm" (ngSubmit)="saveMeal()">
@@ -72,10 +71,21 @@
           Adjust portions
         </button>
 
-        @for (portion of $activeMeal()?.portions; track portion.feed._id) {
-        {{ portion.feed.name }} ({{ portion.quantity.amount }}/{{
-          portion.quantity.unit
-        }}) }
+        <mat-chip-grid #chipGrid aria-label="Fruit selection">
+          @for (portion of $activeMeal()?.portions; track portion.feed._id) {
+          <mat-chip-row (removed)="removePortion(portion.feed._id)">
+            {{ portion.feed.name }} ({{ portion.quantity.amount }}/{{
+              portion.quantity.unit.abbreviation
+            }})
+            <button
+              matChipRemove
+              [attr.aria-label]="'remove ' + portion.feed.name"
+            >
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
+          }
+        </mat-chip-grid>
       </section>
 
       <mat-form-field>

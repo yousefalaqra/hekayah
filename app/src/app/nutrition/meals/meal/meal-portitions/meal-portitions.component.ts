@@ -6,11 +6,10 @@ import { FeedStore } from '../../../../store/feed.store';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { QuantityFormComponent } from '../../../feeds/quantity/quantity-form/quantity-form.component';
-import { MealPortion, MealPortionModel } from '../../../../models/meal';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MealPortionModel } from '../../../../models/meal';
 import { MealPortitionItemComponent } from './meal-portition-item/meal-portition-item.component';
 import { MealStore } from '../../../../store/meal.store';
+import { Feed } from '../../../../models/feeds';
 
 @UntilDestroy()
 @Component({
@@ -48,5 +47,14 @@ export class MealPortitionsComponent implements OnInit {
 
   addMealPortition(mealPortition: MealPortionModel): void {
     this.mealStore.addMealPortition(mealPortition);
+  }
+
+  isAdded(item: Feed) {
+    const activeMeal = this.$activeMeal();
+    if (activeMeal) {
+      return activeMeal.portions.some((x) => x.feed._id === item._id);
+    } else {
+      return false;
+    }
   }
 }

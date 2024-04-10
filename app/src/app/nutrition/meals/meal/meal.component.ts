@@ -20,9 +20,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { QuantityFormComponent } from '../../feeds/quantity/quantity-form/quantity-form.component';
-import {MatSidenav, MatSidenavModule} from '@angular/material/sidenav';
+import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { MealPortitionsComponent } from './meal-portitions/meal-portitions.component';
-
+import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
 
 @UntilDestroy()
 @Component({
@@ -37,7 +38,9 @@ import { MealPortitionsComponent } from './meal-portitions/meal-portitions.compo
     MatButtonModule,
     QuantityFormComponent,
     MatSidenavModule,
-    MealPortitionsComponent
+    MealPortitionsComponent,
+    MatChipsModule,
+    MatIconModule,
   ],
   providers: [
     MealStore,
@@ -73,7 +76,10 @@ export class MealComponent implements OnInit {
 
   mealForm = new FormGroup({
     name: new FormControl(this.$activeMeal()?.name || '', Validators.required),
-    category: new FormControl(this.$activeMeal()?.category || '', Validators.required),
+    category: new FormControl(
+      this.$activeMeal()?.category || '',
+      Validators.required
+    ),
     life_stage: new FormControl(this.$activeMeal()?.life_stage || ''),
     feeding_time: new FormControl(this.$activeMeal()?.feeding_time || ''),
     prep_method: new FormControl(this.$activeMeal()?.prep_method || ''),
@@ -94,7 +100,7 @@ export class MealComponent implements OnInit {
     private lifeStageStore: LifeStageStore,
     private lifeStageService: LifeStageService,
     private feedingTimeStore: FeedingTimeStore,
-    private feedingTimeService: FeedingTimeService,
+    private feedingTimeService: FeedingTimeService
   ) {}
 
   ngOnInit(): void {
@@ -139,23 +145,20 @@ export class MealComponent implements OnInit {
     this.mealForm.controls['portions'].push(this.createPortionFormGroup());
   }
 
-  removePortion(index: number) {
-    this.mealForm.controls['portions'].removeAt(index);
+  removePortion(feedId: string) {
+    this.mealStore.removeMealPortition(feedId)
   }
 
-  togglePortionsSidenav(event: Event): void{
-    event.stopPropagation()
+  togglePortionsSidenav(event: Event): void {
+    event.stopPropagation();
     const currentStatus = this.portionsSidenav?.opened;
 
-    if(currentStatus){
+    if (currentStatus) {
       this.portionsSidenav?.close();
-    }else{
+    } else {
       this.portionsSidenav?.open();
-
     }
   }
-
-
 
   saveMeal(): void {}
 

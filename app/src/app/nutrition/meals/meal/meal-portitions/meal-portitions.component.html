@@ -3,6 +3,7 @@
       <meal-portition-item
         [feed]="feed"
         (mealPortitionAdd)="addMealPortition($event)"
+        [added]="isAdded(feed)"
       ></meal-portition-item>
   }
 </mat-list>

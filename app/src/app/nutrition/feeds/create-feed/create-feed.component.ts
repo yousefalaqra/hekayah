@@ -23,6 +23,7 @@ import { RequiredErrorStateMatcher } from '../../../utils/form.utils';
 import { FeedCategory, FeedModel, QuantityModel } from '../../../models/feeds';
 import { Router } from '@angular/router';
 import { QuantityFormComponent } from '../quantity/quantity-form/quantity-form.component';
+import { Unit } from '../../../models/unit';
 
 @UntilDestroy()
 @Component({
@@ -36,7 +37,7 @@ import { QuantityFormComponent } from '../quantity/quantity-form/quantity-form.c
     MatFormFieldModule,
     ReactiveFormsModule,
     MatButtonModule,
-    QuantityFormComponent
+    QuantityFormComponent,
   ],
   providers: [
     FeedService,
@@ -55,7 +56,10 @@ export class CreateFeedComponent implements OnInit {
   $volumeUnits = this.unitStore.$volumeUnits;
   $weightUnits = this.unitStore.$weightUnits;
 
-  quantityModel?: QuantityModel;
+  quantityModel?: {
+    unit?: Unit;
+    amount?: number | null;
+  };
 
   feedForm = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -92,7 +96,7 @@ export class CreateFeedComponent implements OnInit {
 
   get category() {
     return this.feedForm.controls['category'];
-  }  
+  }
 
   get brand() {
     return this.feedForm.controls['brand'];
@@ -108,7 +112,10 @@ export class CreateFeedComponent implements OnInit {
       brand: this.brand.value!,
       category: this.category.value! as unknown as FeedCategory,
       note: this.note.value!,
-      quantity: this.quantityModel!        
+      quantity: {
+        amount: this.quantityModel?.amount as number,
+        unit: this.quantityModel?.unit?._id!,
+      },
     };
 
     this.feedService
@@ -116,11 +123,9 @@ export class CreateFeedComponent implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe({
         next: (feed) => {
-          this.router.navigate(['/nutrition/feeds'])          
+          this.router.navigate(['/nutrition/feeds']);
         },
-        error: (err) => {
-         
-        },
+        error: (err) => {},
       });
   }
 }

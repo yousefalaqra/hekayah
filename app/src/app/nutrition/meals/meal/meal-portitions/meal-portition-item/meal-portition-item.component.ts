@@ -5,10 +5,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { QuantityFormComponent } from '../../../../feeds/quantity/quantity-form/quantity-form.component';
-import { Feed } from '../../../../../models/feeds';
+import { Feed, Quantity, QuantityModel } from '../../../../../models/feeds';
 import { MealPortionModel } from '../../../../../models/meal';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { Unit } from '../../../../../models/unit';
 
 @UntilDestroy()
 @Component({
@@ -20,7 +21,7 @@ import { MatInputModule } from '@angular/material/input';
     MatButtonModule,
     QuantityFormComponent,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
   ],
   providers: [],
   templateUrl: './meal-portition-item.component.html',
@@ -28,11 +29,9 @@ import { MatInputModule } from '@angular/material/input';
 })
 export class MealPortitionItemComponent implements OnInit {
   @Input() feed!: Feed;
+  @Input() added : boolean = false
 
-  mealPortition = new FormGroup({
-    feedId: new FormControl('', Validators.required),
-    quantity: new FormGroup({}),
-  });
+  quantity?: Quantity;
 
   @Output() mealPortitionAdd = new EventEmitter<MealPortionModel>();
 
@@ -40,14 +39,18 @@ export class MealPortitionItemComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  updateMealPortionQuantity(quantityFrom: FormGroup) {
-    this.mealPortition.controls['quantity'] = quantityFrom;
+  updateMealPortionQuantity(quantity: { unit?: Unit; amount?: number | null }) {
+    if (quantity.unit && quantity.amount) {
+      this.quantity = quantity as Quantity;
+    }
   }
 
   addPortition(): void {
-    this.mealPortitionAdd.emit({
-      feed: this.feed,
-      quantity: this.mealPortition.controls['quantity'].value,
-    } as MealPortionModel);
+    if (this.quantity) {
+      this.mealPortitionAdd.emit({
+        feed: this.feed,
+        quantity: this.quantity,
+      });
+    }
   }
 }

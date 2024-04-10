@@ -1,5 +1,5 @@
 import { FeedingTime } from './feeding-time';
-import { Feed, QuantityModel } from './feeds';
+import { Feed, Quantity, QuantityModel } from './feeds';
 import { LifeStage } from './life-stage';
 
 export enum MealCategory {
@@ -10,12 +10,12 @@ export enum MealCategory {
 
 export interface MealPortion {
   feed: Feed;
-  quantity: QuantityModel;
+  quantity: Quantity;
 }
 
 export interface MealPortionModel {
   feed: Feed;
-  quantity: QuantityModel;
+  quantity: Quantity;
 }
 
 export interface Meal {

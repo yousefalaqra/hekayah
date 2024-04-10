@@ -37,4 +37,15 @@ export class MealStore {
       }
     })
   }
+
+  removeMealPortition(feedId: string) {
+    this.activeMeal.update(val =>{
+      if(val){
+        const updatedPortitions = val.portions.filter(x => x.feed._id !== feedId);
+        return {...val, portions: updatedPortitions}
+      }else{
+        return undefined
+      }
+    })
+  }
 }
