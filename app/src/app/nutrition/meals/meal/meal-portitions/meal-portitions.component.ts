@@ -10,6 +10,7 @@ import { MealPortionModel } from '../../../../models/meal';
 import { MealPortitionItemComponent } from './meal-portition-item/meal-portition-item.component';
 import { MealStore } from '../../../../store/meal.store';
 import { Feed } from '../../../../models/feeds';
+import { MealService } from '../../../../services/meal.service';
 
 @UntilDestroy()
 @Component({
@@ -32,6 +33,7 @@ export class MealPortitionsComponent implements OnInit {
 
   constructor(
     private feedService: FeedService,
+    private mealService: MealService,
     private feedStore: FeedStore,
     private mealStore: MealStore
   ) {}
@@ -47,6 +49,7 @@ export class MealPortitionsComponent implements OnInit {
 
   addMealPortition(mealPortition: MealPortionModel): void {
     this.mealStore.addMealPortition(mealPortition);
+    
   }
 
   isAdded(item: Feed) {
